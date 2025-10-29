@@ -13,6 +13,21 @@ def adicionarAnimal():
     sexo = str(input('Digite o sexo do animal: '))
     arquivo_animais.write(f'{nome};{especie};{raca};{idade};{sexo}\n')
     print('Animal cadastrado com sucesso!')
+    
+
+
+def visualizarAnimais():
+    arquivo_animais = open('animais.csv', 'r', encoding='utf-8')
+    if len(arquivo_animais.read()) == 0:
+        print('Nenhum animal cadastrado')
+    else:
+        organizarTexto('ANIMAIS CADASTRADOS')
+        print('NOME\t\tESPECIE\t\tRACA\t\tIDADE\t\tSEXO')
+        for  in arquivo_animais.readlines()[1:]:
+            nome, especie, raca, idade, sexo = arquivo_animais.strip().split(';')
+            print(f'{nome}\t\t{especie}\t\t{raca}\t\t{idade}\t\t{sexo}')
+        print(arquivo_animais.read())
+        arquivo_animais.close()
 
 
 while True:
@@ -28,7 +43,7 @@ while True:
         if questionamento == 1:
             adicionarAnimal()
         elif questionamento == 2:
-            print('Em construção')
+            visualizarAnimais()
         elif questionamento == 3:
             print('Em construção')
         elif questionamento == 4:
