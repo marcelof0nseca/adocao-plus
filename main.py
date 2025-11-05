@@ -1,4 +1,19 @@
-arquivo_animais = open('animais.csv', 'a', encoding='utf-8')
+def cabecalho():
+    arquivo_animais = open('animais.txt', 'a', encoding='utf-8')
+    arquivo_animais.close()
+
+    arquivo_animais = open('animais.txt', 'r', encoding='utf-8')
+    conteudo = arquivo_animais.read()
+    arquivo_animais.close()
+
+    if conteudo.strip() == "":
+        arquivo_animais = open('animais.txt', 'a', encoding='utf-8')
+        arquivo_animais.write(f"|{'nome':^12}|{'especie':^12}|{'raca':^12}|{'idade':^7}|{'sexo':^6}|{'estado':^14}|{'data':^12}|{'comportamento':^18}|\n")
+        arquivo_animais.close()
+
+        
+
+
 def organizarTexto(texto):
     print('-' * len(texto))
     print(texto)
@@ -6,30 +21,30 @@ def organizarTexto(texto):
 
 
 def adicionarAnimal():
+    arquivo_animais = open('animais.txt', 'a', encoding='utf-8')
+
     nome = str(input('Digite o nome do animal: '))
-    especie = str(input('Digite a especie do animal: '))
-    raca = str(input('Digite a raca do animal: '))  
+    especie = str(input('Digite a espécie do animal: '))
+    raca = str(input('Digite a raça do animal: '))
     idade = str(input('Digite a idade do animal: '))
     sexo = str(input('Digite o sexo do animal: '))
-    arquivo_animais.write(f'{nome};{especie};{raca};{idade};{sexo}\n')
+    estado = str(input('Digite o estado de saúde do animal: '))
+    data = str(input('Digite a data de chegada do animal: '))
+    comportamento = str(input('Digite o comportamento do animal: '))
+
+    arquivo_animais.write(f'|{nome:^12}|{especie:^12}|{raca:^12}|{idade:^7}|{sexo:^6}|{estado:^14}|{data:^12}|{comportamento:^18}|\n')
     print('Animal cadastrado com sucesso!')
-    
+    arquivo_animais.close()
 
 
 def visualizarAnimais():
-    arquivo_animais = open('animais.csv', 'r', encoding='utf-8')
-    if len(arquivo_animais.read()) == 0:
-        print('Nenhum animal cadastrado')
-    else:
-        organizarTexto('ANIMAIS CADASTRADOS')
-        print('NOME\t\tESPECIE\t\tRACA\t\tIDADE\t\tSEXO')
-        for  in arquivo_animais.readlines()[1:]:
-            nome, especie, raca, idade, sexo = arquivo_animais.strip().split(';')
-            print(f'{nome}\t\t{especie}\t\t{raca}\t\t{idade}\t\t{sexo}')
-        print(arquivo_animais.read())
-        arquivo_animais.close()
+    arquivo_animais = open('animais.txt', 'r', encoding='utf-8')
+    print(arquivo_animais.read())
+    arquivo_animais.close()
 
 
+
+cabecalho()
 while True:
     try:
         questionamento = int(input('1. Adicionar Animal\n2. Visulizar Animais\n3. Editar Animal\n4. Excluir Animal\n5. Sair\nDigite a opção desejada: '))
@@ -49,7 +64,6 @@ while True:
         elif questionamento == 4:
             print('Em construção')
         elif questionamento == 5:
-            arquivo_animais.close()
             print('Saindo...')
             break
         else:
