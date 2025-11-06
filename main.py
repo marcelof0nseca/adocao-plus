@@ -43,6 +43,14 @@ def visualizarAnimais():
     arquivo_animais.close()
 
 
+def editar_animal():
+    arquivo=open('animais.txt', 'r', encoding="utf-8")
+    linha = arquivo.readlines()
+    print(f'{'ID':^3}\t{linha[0]}', end='')
+    for i in range(1,(len(linha))):
+        print(f'{i:^3}\t{linha[i]}')
+
+
 
 cabecalho()
 print('Sistema de Gestão para Centros de Adoção de Animais')
@@ -61,7 +69,7 @@ while True:
         elif questionamento == 2:
             visualizarAnimais()
         elif questionamento == 3:
-            print('Em construção')
+            editar_animal()
         elif questionamento == 4:
             print('Em construção')
         elif questionamento == 5:
