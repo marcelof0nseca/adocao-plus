@@ -48,13 +48,13 @@ def editar_animal():
 
     if len(linhas) <= 1:
         print("Não existe nada a ser editado.")
-        return 
-
-    print(f'{"ID":^3}\t{linhas[0].strip()}') 
-    for i in range(1, len(linhas)):
-        print(f'{i:^3}\t{linhas[i]}', end='')
+        return  
 
     while True:
+        print(f'{"ID":^3}\t{linhas[0].strip()}')  
+        for i in range(1, len(linhas)):
+            print(f'{i:^3}\t{linhas[i]}', end='')
+
         try:
             pergunta = int(input('\nO Que você deseja?\n1 - Excluir animal\n2 - Editar animal\n3 - Excluir lista completa\n4 - Encerrar\n'))
         except ValueError:
@@ -118,7 +118,6 @@ def editar_animal():
 
         else:
             print('Opção inválida.')
-
 
 cabecalho()
 print('Sistema de Gestão para Centros de Adoção de Animais')
