@@ -8,7 +8,7 @@ def cabecalho():
 
     if conteudo.strip() == "":
         arquivo_animais = open('animais.txt', 'a', encoding='utf-8')
-        arquivo_animais.write(f"|{'NOME':^12}|{'ESPÉCIE':^12}|{'RAÇA':^12}|{'IDADE':^7}|{'SEXO':^6}|{'ESTADO DE SAÚDE':^20}|{'DATA DE CHEGADA':^20}|{'COMPORTAMENTO':^18}|\n")
+        arquivo_animais.write(f"|{'NOME':^12}|{'ESPÉCIE':^12}|{'RAÇA':^12}|{'IDADE':^7}|{'SEXO':^7}|{'ESTADO DE SAÚDE':^20}|{'DATA DE CHEGADA':^20}|{'COMPORTAMENTO':^18}|\n")
         arquivo_animais.close()
 
 
@@ -30,7 +30,7 @@ def adicionarAnimal():
     data = str(input('Digite a data de chegada do animal: '))
     comportamento = str(input('Digite o comportamento do animal: ')).capitalize()
 
-    arquivo_animais.write(f'|{nome:^12}|{especie:^12}|{raca:^12}|{idade:^7}|{sexo:^6}|{estado:^20}|{data:^20}|{comportamento:^18}|\n')
+    arquivo_animais.write(f'|{nome:^12}|{especie:^12}|{raca:^12}|{idade:^7}|{sexo:^7}|{estado:^20}|{data:^20}|{comportamento:^18}|\n')
     print('Animal cadastrado com sucesso!')
     arquivo_animais.close()
 
@@ -56,14 +56,14 @@ def editar_animal():
             print(f'{i:^3}\t{linhas[i]}', end='')
 
         try:
-            pergunta = int(input('\nO Que você deseja?\n1 - Excluir animal\n2 - Editar animal\n3 - Excluir lista completa\n4 - Encerrar\n'))
+            pergunta = int(input('1 - Excluir animal\n2 - Editar animal\n3 - Excluir lista completa\n4 - Encerrar\nDigite a opção desejada: '))
         except ValueError:
             print('Entrada inválida')
             continue
 
         if pergunta == 1:
             try:
-                id_excluir = int(input('Digite o ID do animal para ser excluído:\n'))
+                id_excluir = int(input('Digite o ID do animal para ser excluído: \n'))
                 if 1 <= id_excluir < len(linhas):
                     del linhas[id_excluir]
                     arquivo = open('animais.txt', 'w', encoding="utf-8")
@@ -89,13 +89,15 @@ def editar_animal():
                     data = input('Data de chegada: ')
                     comportamento = input('Comportamento: ').capitalize()
 
-                    nova = f'|{nome:^12}|{especie:^12}|{raca:^12}|{idade:^7}|{sexo:^6}|{estado:^20}|{data:^20}|{comportamento:^18}|\n'
+                    nova = f'|{nome:^12}|{especie:^12}|{raca:^12}|{idade:^7}|{sexo:^7}|{estado:^20}|{data:^20}|{comportamento:^18}|\n'
                     linhas[id_editar] = nova
 
                     arquivo = open('animais.txt', 'w', encoding="utf-8")
                     arquivo.writelines(linhas)
                     arquivo.close()
                     print('Animal editado com sucesso!')
+                    visualizarAnimais()
+                    return
                 else:
                     print('ID inválido')
             except ValueError:
